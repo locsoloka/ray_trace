@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "file.hpp"
+#include "../render/canvas/canvas.hpp"
 
 void SavePPM::save_file()
 {
@@ -18,5 +19,14 @@ SavePPM::SavePPM(std::string name,std::vector<unsigned char> pixel_vector ,int x
     pixels = pixel_vector;
     width  = x;
     height = y;
+    save_file();
+}
+
+SavePPM::SavePPM(std::string name, Canvas canvas)
+{
+    filename = name;
+    pixels = canvas.get_pixels();
+    width = canvas.get_width();
+    height = canvas.get_height();
     save_file();
 }

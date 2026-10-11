@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "../render/canvas/canvas.hpp"
+
 class SavePPM
 {
     private:
@@ -16,6 +18,7 @@ class SavePPM
         std::string filename;
 
         SavePPM(std::string name, std::vector<unsigned char> pixel_vector ,int x, int y);
+        SavePPM(std::string name, Canvas canvas);
     };
 
 #endif

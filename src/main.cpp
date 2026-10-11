@@ -3,22 +3,17 @@
 #include <vector>
 
 #include "file_mgt/file.hpp"
-#include "render/basic_operations/basic_operations.hpp"
+#include "render/canvas/canvas.hpp"
+
+
 
 int main()
 {
-    int width = 100;
-    int height = 100;
-    
-    std::vector<unsigned char> pixels(width * height * 3);
-    
-    for (int i = 0; i < width * height * 3; i += 3)
+    Canvas canvas(600, 600); // Create a new canvas
+    for (int i = 0; i <  canvas.get_width() * canvas.get_height() * 3; i += 3)
     {
-        pixels[i]     = 0; // R (Piros)
-        pixels[i + 1] = 0;   // G (Zöld)
-        pixels[i + 2] = 0;   // B (Kék)
+        canvas.draw_point(i, 255, 255, 255);
     }
-    plotline(0, 0, 100, 100, pixels);
     std::string filename = "file.ppm";
-    SavePPM file(filename, pixels, width, height);
+    SavePPM file(filename, canvas);
 }
