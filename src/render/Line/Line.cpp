@@ -1,9 +1,24 @@
 #include <vector>
 #include <cmath>
 
-void plotline(int x0,int y0,int x1,int y1, std::vector<unsigned char>& pixel_vector)
+#include "Line.hpp"
+
+Line::Line(Canvas *canvas)
+:   canvas(canvas)
 {
-    int width = 100; 
+
+}
+
+void Line::set_line_points(int x0_in, int y0_in, int x1_in, int y1_in)
+{
+    x0 = x0_in;
+    y0 = y0_in;
+    x1 = x1_in;
+    y1 = y1_in;
+}
+
+void Line::drawline()
+{
 
     int dx = std::abs(x1 - x0);
     int sx = x0 < x1 ? 1 : -1;
@@ -17,12 +32,10 @@ void plotline(int x0,int y0,int x1,int y1, std::vector<unsigned char>& pixel_vec
     while (true)
     {
         // Check boundaries to prevent out-of-bounds crashes
-        if (x >= 0 && x < width && y >= 0 && y < width) 
+        if (x >= 0 && x < canvas->get_width() && y >= 0 && y < canvas->get_width()) 
         {
-            int cursor = (y * width + x) * 3;
-            pixel_vector[cursor]     = 255; // R
-            pixel_vector[cursor + 1] = 255; // G
-            pixel_vector[cursor + 2] = 255; // B
+            int cursor = (y * canvas->get_width() + x) * 3;
+            canvas->draw_point(cursor, 255, 255, 255);
         }
 
         if (x == x1 && y == y1) break;
